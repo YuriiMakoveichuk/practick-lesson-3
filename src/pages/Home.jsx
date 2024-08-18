@@ -1,4 +1,4 @@
-import { Container, Heading, Section } from 'components';
+import { Container, CountryList, Heading, Loader, Section } from 'components';
 import { useEffect, useState } from 'react';
 import { getCountries } from 'service/countryApi';
 
@@ -21,12 +21,13 @@ const Home = () => {
     };
     fatchData();
   }, []);
-  console.log(countries);
 
   return (
     <Section>
       <Container>
-        <Heading title="Home" bottom />
+        {countries.length > 0 && <CountryList countries={countries} />}
+        {isLoader && <Loader />}
+        {error && <Heading title="Somethins title errer" bottom />}
       </Container>
     </Section>
   );
